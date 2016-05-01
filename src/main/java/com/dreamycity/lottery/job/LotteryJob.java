@@ -25,8 +25,8 @@ public class LotteryJob implements Job {
     public void execute(JobExecutionContext context)
         throws JobExecutionException {
 
-        JobKey jobKey = context.getJobDetail().getKey();
-        logger.info(jobKey);
+        //JobKey jobKey = context.getJobDetail().getKey();
+        //logger.info(jobKey);
 
         ApplicationContext appContext = new ClassPathXmlApplicationContext("Spring-Module.xml");
         LotteryDAO lotteryDAO = (LotteryDAO) appContext.getBean("lotteryDAO");

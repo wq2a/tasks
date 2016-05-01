@@ -1,5 +1,8 @@
 package com.dreamycity.lottery.dao.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +13,8 @@ import com.dreamycity.lottery.dao.LotteryDAO;
 import com.dreamycity.lottery.model.Lottery;
 
 public class JdbcLotteryDAO implements LotteryDAO {
+    private static final Logger logger = LogManager.getLogger(JdbcLotteryDAO.class);
+
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
@@ -34,10 +39,11 @@ public class JdbcLotteryDAO implements LotteryDAO {
             ps.setInt(7,lottery.getRed6());
             ps.setInt(8,lottery.getBlue());
             ps.setString(9,lottery.getTime());
+            logger.info(ps);
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         } finally {
             if(conn != null) {
                 try{

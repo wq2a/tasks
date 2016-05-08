@@ -129,6 +129,7 @@ public class Protocol {
                 AliOrderDAO aliOrderDAO = (AliOrderDAO) appContext.getBean("aliOrderDAO");
                 AliOrder aliOrder = new AliOrder();
                 aliOrder.build("/var/www/html/uploads/alipay/"+requestMap.get("Parameter1"));
+                //aliOrder.build("/Users/lily/Sites/html/uploads/alipay/"+requestMap.get("Parameter1"));
                 if(aliOrderDAO.insert(aliOrder)) {
                     ItemDAO itemDAO = (ItemDAO) appContext.getBean("itemDAO");
                     itemDAO.insert(aliOrder);

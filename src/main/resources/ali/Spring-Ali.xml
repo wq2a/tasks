@@ -1,0 +1,14 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="itemDAO" class="com.dreamycity.ali.dao.impl.JdbcItemDAO">
+		<property name="dataSource" ref="ilifeDataSource" />
+	</bean>
+
+	<bean id="aliOrderDAO" class="com.dreamycity.ali.dao.impl.JdbcAliOrderDAO">
+		<property name="dataSource" ref="ilifeDataSource" />
+	</bean>
+	
+</beans>

@@ -3,32 +3,23 @@ package com.dreamycity.common;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import org.quartz.CronTrigger;
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerFactory;
-import org.quartz.SchedulerMetaData;
-import org.quartz.impl.StdSchedulerFactory;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-import static org.quartz.CronScheduleBuilder.cronSchedule;
-import static org.quartz.JobBuilder.newJob;
-import static org.quartz.TriggerBuilder.newTrigger;
-
-import java.util.Date;
-
-import com.dreamycity.lottery.job.LotteryJob;
+import com.dreamycity.common.JobSocket;
 
 public class App {
 	private static final Logger logger = LogManager.getLogger(App.class);
 
-	public void run() throws Exception {
+/*	public void run() throws Exception {
 
 		logger.info("Initializing");
 
+        
 		SchedulerFactory sf = new StdSchedulerFactory();
     	Scheduler sched = sf.getScheduler();
 
-    	/** Lottery Job **/
+    	// Lottery Job
     	JobDetail lotteryJob = newJob(LotteryJob.class).withIdentity("lottery", "dreamyCity").build();
     	CronTrigger lotteryTrigger = newTrigger().withIdentity("lotteryTrigger", "dreamyCity").withSchedule(cronSchedule("00 09 * * * ?"))
         	.build();
@@ -40,10 +31,37 @@ public class App {
         //..
 
     	sched.start();
-	}
 
+        
+	}
+*/
     public static void main(String[] args) throws Exception{
-    	App app = new App();
-    	app.run();
+    	//App app = new App();
+    	//app.run();
+        /*
+        AliOrder aliOrder = new AliOrder();
+        aliOrder.build("1870132511898926.txt");
+        ApplicationContext appContext = new ClassPathXmlApplicationContext("Spring-Module.xml");
+        AliOrderDAO aliOrderDAO = (AliOrderDAO) appContext.getBean("aliOrderDAO");
+        if(aliOrderDAO.insert(aliOrder)) {
+            ItemDAO itemDAO = (ItemDAO) appContext.getBean("itemDAO");
+            itemDAO.insert(aliOrder);
+        }else{
+            logger.info("Order exist!!!");
+        }
+        */
+        //System.out.println(aliOrder.toString());
+    
+        try{
+            ServerSocket jobServerSocket = new ServerSocket(9900);
+            while(true){
+                JobSocket c = new JobSocket(jobServerSocket.accept());
+                Thread t = new Thread(c);
+                t.start();
+            }
+        } catch(Exception e){
+            logger.error(e.getMessage());
+        }
+        
     }
 }

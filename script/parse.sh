@@ -1,8 +1,10 @@
 #!/bin/bash
 for i in $(ls temp);do
-  if [ ! -d "$1" ];then 
-    mv temp/$i 1.html
+  if [ -d "$i" ];then 
+    rm -r temp/$i
+  else
+  	mv temp/$i 1.html
     ./parsehtml.py
-    rm 1.html
+    rm -r 1.html
   fi
 done

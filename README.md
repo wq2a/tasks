@@ -23,3 +23,4 @@ JAVA_HOME="/usr/lib/jvm/open-jdk"
 if [ -d "$HOME/apache-maven-3.3.9/bin" ] ; then
     PATH="$HOME/apache-maven-3.3.9/bin:$PATH"
 fi
+  source .profile

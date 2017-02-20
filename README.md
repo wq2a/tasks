@@ -11,7 +11,7 @@ change Protocol line 131 built path
   echo $JAVA_HOME
   $JAVA_HOME
   vi .bash_profile
-JAVA_HOME="/usr/lib/jvm/open-jdk"
+JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64"
   source .bash_profile 
   echo $JAVA_HOME
 
